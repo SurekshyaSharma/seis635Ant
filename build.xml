@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project name="MyProject">
+    
+    <property name="version">1.2.3</property>
+    
+    <!-- Target Dependencies -->
+        <target name="firstTarget">
+            <echo>This is version ${version}</echo>
+        </target>
+        <!-- target firstTarget finish -->
+        <target name="A">
+            <echo>Target A</echo>
+        </target>
+        <!-- target A-->
+        <target name="B" depends="A">
+            <echo>Target B</echo>
+        </target>
+        <!-- target B -->
+        <target name="C" depends="A, B">
+            <echo>Target C</echo>
+        </target>
+        <!-- target C-->
+        <!-- second example-->
+
+        <path id="projectClasspath">
+            <fileset dir="lib">
+                <include name="**.jar"/>
+            </fileset>
+        </path>
+    
+        <target name="clean">
+            <delete dir="${dir.build}"/>
+        </target>
+    
+    
+        <target name="init">
+            <mkdir dir="${dir.build}"/>
+            <mkdir dir="${dir.build.classes}"/>
+        </target>
+    
+    
+        <target name="compile" depends="init">
+            <echo>Compiling Java source</echo>
+    
+            <javac classpathref="projectClasspath"
+                   srcdir="${dir.src}"
+                   destdir="${dir.build.classes}" />
+        </target>
+    
+        <target name="jar" depends="compile">
+            <echo>Making JAR file</echo>
+    
+            <jar basedir="${dir.build.classes}" file="${file.jar}" />
+        </target>
+    
+        <target name="javadoc">
+            <echo>Making JavaDoc from source</echo>
+    
+            <javadoc sourcepath="${dir.src}" destdir="${dir.build.javadoc}"></javadoc>
+        </target>
+
+</project>
