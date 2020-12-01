@@ -16,5 +16,5 @@
 ### Create a folder with build.xml file with the content listed below
 ### navigate to the folder were the build.xml file 
 ### And run ant from the terminal
-command: ant <Target name>
+command: ant Target name
   
